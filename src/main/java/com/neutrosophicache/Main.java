@@ -44,43 +44,67 @@ public class Main {
         System.out.println(lruC);
         System.out.println(lfuC);
 
-        System.out.println("\n=== LIVE EXAMPLE TRACE (30 requests) ===");
-        List<String> trace = gen.getLiveExampleTrace(workloadC);
+        System.out.println(
+                "\n=== LIVE EXAMPLE TRACE ===");
+        System.out.println(
+                "Scenario: UNILAG Maths Department " +
+                        "Dictionary Cache (capacity = 5)\n");
+
+        List<String> liveTrace = gen.generateLiveDemoTrace();
+
         NeutrosophicCache liveCache =
                 new NeutrosophicCache(5, 0.7);
-        for (String key : trace) {
+
+        System.out.println(
+                "Step | Request              | Decision");
+        System.out.println(
+                "-----|----------------------|----------");
+
+        int step = 1;
+        for (String key : liveTrace) {
             String result = liveCache.get(key);
             if (result == null) {
-                liveCache.put(key, "value_" + key);
-                System.out.println("MISS → inserted: " + key);
+                liveCache.put(key, "definition_of_" + key);
+                System.out.printf(
+                        "%-4d | %-20s | MISS → inserted%n",
+                        step, key);
             } else {
-                System.out.println("HIT  → retained: " + key);
+                System.out.printf(
+                        "%-4d | %-20s | HIT  → retained%n",
+                        step, key);
             }
+            step++;
         }
+
         System.out.println("\nEviction Log:");
+        System.out.println(
+                "Key                  | p     | F     " +
+                        "| integralSum | freq");
+        System.out.println(
+                "---------------------|-------|-------" +
+                        "|-------------|-----");
         liveCache.getEvictionLog()
                 .forEach(System.out::println);
+
         System.out.printf("%nFinal Hit Rate:  %.1f%%%n",
                 liveCache.getHitRate());
         System.out.printf("Final Miss Rate: %.1f%%%n",
                 liveCache.getMissRate());
 
-
-
         double[] neutroRates = {
-                neutroA.hitRate,
-                neutroB.hitRate,
-                neutroC.hitRate
+                neutroA.hitRate(),
+                neutroB.hitRate(),
+                neutroC.hitRate()
         };
         double[] lruRates = {
-                lruA.hitRate,
-                lruB.hitRate,
-                lruC.hitRate
+                lruA.hitRate(),
+                lruB.hitRate(),
+                lruC.hitRate()
         };
         double[] lfuRates = {
-                lfuA.hitRate,
-                lfuB.hitRate,
-                lfuC.hitRate
+                lfuA.hitRate(),
+                lfuB.hitRate(),
+                lfuC.hitRate()
         };
 
         try {
@@ -93,6 +117,4 @@ public class Main {
             throw new RuntimeException(e);
         }
     }
-
-
 }

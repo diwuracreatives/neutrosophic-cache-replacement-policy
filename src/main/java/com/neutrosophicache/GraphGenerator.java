@@ -35,16 +35,15 @@ public class GraphGenerator {
             dataset.addValue(lfuRates[i],    "LFU",           workloads[i]);
         }
 
-        // Create chart
         JFreeChart chart = ChartFactory.createLineChart(
                 "Hit Rate Comparison: Neutrosophic vs LRU vs LFU",
                 "Workload Type",
                 "Hit Rate (%)",
                 dataset,
                 PlotOrientation.VERTICAL,
-                true,  // legend
-                true,  // tooltips
-                false  // urls
+                true,
+                true,
+                false
         );
 
         chart.setBackgroundPaint(Color.WHITE);

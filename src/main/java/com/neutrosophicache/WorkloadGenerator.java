@@ -33,13 +33,17 @@ public class WorkloadGenerator {
 
     public List<String> generateIgnoranceWorkload() {
         List<String> requests = new ArrayList<>();
+
+        List<Integer> items = new ArrayList<>();
+        for (int i = 0; i < itemSpace; i++) items.add(i);
+
         for (int i = 0; i < requestCount; i++) {
-            requests.add("item_" + random.nextInt(itemSpace));
+            Collections.shuffle(items, random);
+            requests.add("item_" + items.get(
+                    random.nextInt(itemSpace)));
         }
         return requests;
     }
-
-
     public List<String> generateMixedWorkload() {
         List<String> contradiction = generateContradictionWorkload();
         List<String> ignorance = generateIgnoranceWorkload();
@@ -55,5 +59,51 @@ public class WorkloadGenerator {
 
     public List<String> getLiveExampleTrace(List<String> workload) {
         return workload.subList(0, Math.min(30, workload.size()));
+    }
+
+    private static final String[] MATHS_TERMS = {
+            "integral", "derivative", "matrix", "limit",
+            "eigenvalue", "neutrosophic", "fourier_transform",
+            "riemann_surface", "fifo", "topology",
+            "determinant", "vector", "calculus", "algebra",
+            "probability"
+    };
+
+    public List<String> generateLiveDemoTrace() {
+
+        String[] sequence = {
+                "integral",
+                "derivative",
+                "matrix",
+                "integral",
+                "limit",
+                "eigenvalue",
+                "integral",
+                "derivative",
+                "neutrosophic",
+                "fourier_transform",
+                "integral",
+                "matrix",
+                "riemann_surface",
+                "derivative",
+                "limit",
+                "integral",
+                "eigenvalue",
+                "matrix",
+                "neutrosophic",
+                "integral",
+                "topology",
+                "derivative",
+                "integral",
+                "fifo",
+                "matrix",
+                "integral",
+                "derivative",
+                "limit",
+                "integral",
+                "matrix"
+        };
+
+        return Arrays.asList(sequence);
     }
 }
