@@ -3,9 +3,9 @@ package com.neutrosophicache;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CacheItem {
+class CacheItem<V> {
     public String key;
-    public String value;
+    public V value;
 
     public double T;
     public double I1;
@@ -30,7 +30,7 @@ public class CacheItem {
     private static final double DELTA = 1.0;
     private static final double RHO = 0.005;
 
-    public CacheItem(String key, String value, long simulatedTime) {
+    public CacheItem(String key, V value, long simulatedTime) {
         this.key = key;
         this.value = value;
         this.lastAccess = simulatedTime;
@@ -66,10 +66,8 @@ public class CacheItem {
 
         p = estimateP(simulatedTime);
 
-        I2 = (t > 0) ? GAMMA / Math.pow(Math.max(t, 1), p) : GAMMA;
-
-
-        double timeSinceLastAccess = simulatedTime - lastAccess;
+        I2 = (t > 0) ? GAMMA / Math.pow(Math.max(t, 1), p)
+                : GAMMA;
 
         double age = simulatedTime - insertionTime;
         F = DELTA * (1 - Math.exp(-RHO * age))
@@ -78,7 +76,6 @@ public class CacheItem {
 
     private double estimateP(long simulatedTime) {
         if (accessIntervals.size() < 2) {
-
             long age = simulatedTime - insertionTime;
             if (age > 50 && frequency > 3) {
                 return 0.5;
@@ -95,20 +92,15 @@ public class CacheItem {
                         Math.pow(interval - mean, 2))
                 .average().orElse(0.0);
 
-
         double cv = (mean > 0) ?
                 Math.sqrt(variance) / mean : 0;
-
 
         long age = simulatedTime - insertionTime;
         boolean isContradictory = age > 100
                 && frequency > 5
                 && mean < 20;
 
-        if (isContradictory) {
-            return 0.5;
-        }
-
+        if (isContradictory) return 0.5;
         if (cv > 2.0) return 0.4;
         if (cv > 1.0) return 0.8;
 
@@ -117,9 +109,8 @@ public class CacheItem {
 
     public void updateFalsity(long simulatedTime) {
         double age = simulatedTime - insertionTime;
-
         double accessRate = (age > 0) ?
-                (frequency / (double) age) * 100 : 0;
+                (frequency / age) * 100 : 0;
         F = DELTA * (1 - Math.exp(-RHO * age))
                 * Math.exp(-accessRate);
     }
