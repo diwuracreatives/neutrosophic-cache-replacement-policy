@@ -42,7 +42,7 @@ implementation("io.github.diwuracreatives:neutrosophic-cache-replacement-policy:
 
 ## Usage
 
-```java
+```
 import com.neutrosophicache.NeutrosophicCache;
 
 NeutrosophicCache<K, V> cache = new NeutrosophicCache<>(capacity);
