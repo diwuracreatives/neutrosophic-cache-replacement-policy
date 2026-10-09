@@ -27,9 +27,9 @@ Then add the dependency:
 
 ```xml
 <dependency>
-  <groupId>com.github.yourname</groupId>
-  <artifactId>my-algo</artifactId>
-  <version>v1.0.0</version>
+<groupId>io.github.diwuracreatives</groupId>
+<artifactId>neutrosophic-cache-replacement-policy</artifactId>
+<version>v1.0.0</version>
 </dependency>
 ```
 
