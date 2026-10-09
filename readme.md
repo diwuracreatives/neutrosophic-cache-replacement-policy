@@ -12,17 +12,24 @@ Eviction decisions are determined by convergence of the improper neutrosophic in
 
 ## Installation
 
-Available on **Maven Central**.
+Add JitPack to your `pom.xml`:
 
-### Maven
+```xml
+<repositories>
+  <repository>
+    <id>jitpack.io</id>
+    <url>https://jitpack.io</url>
+  </repository>
+</repositories>
+```
 
-Add the dependency to your `pom.xml`:
+Then add the dependency:
 
 ```xml
 <dependency>
-    <groupId>io.github.diwuracreatives</groupId>
-    <artifactId>neutrosophic-cache-replacement-policy</artifactId>
-    <version>1.0.0</version>
+  <groupId>com.github.yourname</groupId>
+  <artifactId>my-algo</artifactId>
+  <version>v1.0.0</version>
 </dependency>
 ```
 
