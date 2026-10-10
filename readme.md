@@ -19,7 +19,7 @@ Add the dependency to your `pom.xml`:
 ```xml
 <dependency>
     <groupId>io.github.diwuracreatives</groupId>
-    <artifactId>neutrosophic-cache-replacement-policy</artifactId>
+    <artifactId>neutrosophic-cache</artifactId>
     <version>1.0.0</version>
 </dependency>
 ```
