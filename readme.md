@@ -12,24 +12,15 @@ Eviction decisions are determined by convergence of the improper neutrosophic in
 
 ## Installation
 
-Add JitPack to your `pom.xml`:
+### Maven
 
-```xml
-<repositories>
-  <repository>
-    <id>jitpack.io</id>
-    <url>https://jitpack.io</url>
-  </repository>
-</repositories>
-```
-
-Then add the dependency:
+Add the dependency to your `pom.xml`:
 
 ```xml
 <dependency>
-<groupId>io.github.diwuracreatives</groupId>
-<artifactId>neutrosophic-cache-replacement-policy</artifactId>
-<version>v1.0.0</version>
+    <groupId>io.github.diwuracreatives</groupId>
+    <artifactId>neutrosophic-cache-replacement-policy</artifactId>
+    <version>1.0.0</version>
 </dependency>
 ```
 
